@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+# zettel: creates a new zettel on Zettelkasten repository
+
+ZETTAG=`utctag`
+REPOSDIR="${HOME}/repos/github.com/${USER}"
+ZETTELKASTENDIR="${REPOSDIR}/zettelkasten/"
+
+cd "${ZETTELKASTENDIR}"
+mkdir "${ZETTAG}"
+touch "${ZETTAG}/README.md"
+vi "${ZETTAG}/README.md"
