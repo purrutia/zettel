@@ -11,7 +11,7 @@ main() {
     mkdir "${ZETTAG}"
     touch "${ZETTAG}/README.md"
     echo "Zettel:  ${ZETTAG}" > "${ZETTAG}/README.md"
-    vi "${ZETTAG}/README.md"
+    nvim "${ZETTAG}/README.md"
 }
 
 main
