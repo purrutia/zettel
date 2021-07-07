@@ -6,7 +6,12 @@ ZETTAG=`utctag`
 REPOSDIR="${HOME}/repos/github.com/${USER}"
 ZETTELKASTENDIR="${REPOSDIR}/zettelkasten/"
 
-cd "${ZETTELKASTENDIR}"
-mkdir "${ZETTAG}"
-touch "${ZETTAG}/README.md"
-vi "${ZETTAG}/README.md"
+main() {
+    cd "${ZETTELKASTENDIR}"
+    mkdir "${ZETTAG}"
+    touch "${ZETTAG}/README.md"
+    echo "Zettel:  ${ZETTAG}" > "${ZETTAG}/README.md"
+    vi "${ZETTAG}/README.md"
+}
+
+main
