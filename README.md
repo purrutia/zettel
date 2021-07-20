@@ -4,9 +4,7 @@ zettel is an application to facilitate the creation of zettels on the zettelkast
 
 ## TODO
 
-- Obtain zettel tag using utctag
-- Create a directory with the zettel tag in Zettelkasten repo
-- Create README.md file on corresponding zettel directory
-- Open README.md file on text editor
+- ~~Open README.md file on text editor~~
 - Try to make it universal
-
+- ~~Add the zettel tag as a YAML codeblock~~
+- ~~Change calls to the editor with exec command~~
