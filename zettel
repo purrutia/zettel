@@ -2,18 +2,20 @@
 
 # zettel: creates a new zettel on Zettelkasten repository
 
-ZETTAG=`utctag`
+ZETTAG=$(utctag)
 REPOSDIR="${HOME}/repos/github.com/${USER}"
 ZETTELKASTENDIR="${REPOSDIR}/zettelkasten/"
 
 main() {
-    cd "${ZETTELKASTENDIR}"
+    cd "${ZETTELKASTENDIR}" || exit
     mkdir "${ZETTAG}"
     touch "${ZETTAG}/README.md"
-    echo "---" > "${ZETTAG}/README.md"
-    echo "zetteltag: ${ZETTAG}" >> "${ZETTAG}/README.md"
-    echo "---\n" >> "${ZETTAG}/README.md"
-    echo "# 'ZETTEL TITLE'" >> "${ZETTAG}/README.md"
+    {
+        echo "---"
+        echo "zetteltag: ${ZETTAG}"
+        echo "---\n"
+        echo "# 'ZETTEL TITLE'" 
+    } >> "${ZETTAG}/README.md"
     exec nvim "${ZETTAG}/README.md"
 }
 
