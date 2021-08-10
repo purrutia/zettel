@@ -16,7 +16,7 @@ main() {
         echo "---\n"
         echo "# 'ZETTEL TITLE'" 
     } >> "${ZETTAG}/README.md"
-    exec nvim "${ZETTAG}/README.md"
+    exec ${EDITOR} "${ZETTAG}/README.md"
 }
 
 main
