@@ -7,16 +7,27 @@ REPOSDIR="${HOME}/repos/github.com/${USER}"
 ZETTELKASTENDIR="${REPOSDIR}/zettelkasten/"
 
 main() {
+    ZETTELTITLE=$@
     cd "${ZETTELKASTENDIR}" || exit
     mkdir "${ZETTAG}"
     touch "${ZETTAG}/README.md"
     {
         echo "---"
         echo "zetteltag: ${ZETTAG}"
+        echo "keywords: []"
+        echo "mainfont: Hack"
+        echo "mainfontoptions:"
+        echo "- Extension=.ttf"
+        echo "- UprightFont=* Regular Nerd Font Complete Windows Compatible"
+        echo "- BoldFont=* Bold Nerd Font Complete Windows Compatible"
+        echo "- ItalicFont=* Italic Nerd Font Complete Windows Compatible"
+        echo "- BoldItalicFont=* Bold Italic Nerd Font Complete Windows Compatible"
+        echo "geometry:"
+        echo "- margin=1in"
         echo "---\n"
-        echo "# 'ZETTEL TITLE'" 
+        echo "# ${ZETTELTITLE}" 
     } >> "${ZETTAG}/README.md"
-    exec ${EDITOR} "${ZETTAG}/README.md"
+    ${EDITOR} "${ZETTAG}/README.md" && git add "${ZETTAG}/" && git commit -m "${ZETTELTITLE}"
 }
 
-main
+main $@
