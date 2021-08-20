@@ -6,28 +6,49 @@ ZETTAG=$(utctag)
 REPOSDIR="${HOME}/repos/github.com/${USER}"
 ZETTELKASTENDIR="${REPOSDIR}/zettelkasten/"
 
+usage() {
+    printf "\nusage:\n\n"
+    printf "Creates a new zettel for the Zettelkasten:\n"
+    printf "zettel <zettel Title>\n\n"
+    printf "Displays this help:\n"
+    printf "zettel -h\n\n"
+}
+
 main() {
-    ZETTELTITLE=$@
-    cd "${ZETTELKASTENDIR}" || exit
-    mkdir "${ZETTAG}"
-    touch "${ZETTAG}/README.md"
-    {
-        echo "---"
-        echo "zetteltag: ${ZETTAG}"
-        echo "keywords: []"
-        echo "mainfont: Hack"
-        echo "mainfontoptions:"
-        echo "- Extension=.ttf"
-        echo "- UprightFont=* Regular Nerd Font Complete Windows Compatible"
-        echo "- BoldFont=* Bold Nerd Font Complete Windows Compatible"
-        echo "- ItalicFont=* Italic Nerd Font Complete Windows Compatible"
-        echo "- BoldItalicFont=* Bold Italic Nerd Font Complete Windows Compatible"
-        echo "geometry:"
-        echo "- margin=1in"
-        echo "---\n"
-        echo "# ${ZETTELTITLE}" 
-    } >> "${ZETTAG}/README.md"
-    ${EDITOR} "${ZETTAG}/README.md" && git add "${ZETTAG}/" && git commit -m "${ZETTELTITLE}"
+
+    # Checks if the zettel has the Title
+    test ! -n "${1}" && usage && exit 1
+    if test "${1}" = "-h"; then
+        usage
+    else
+        ZETTELTITLE=$@
+        case $ZETTELTITLE in
+            (*[!abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_:.[:blank:]-]*)
+                echo >&2 "Zettel Title includes NOT allowed characters" && exit 1;;
+            (*)
+                cd "${ZETTELKASTENDIR}" || exit
+                mkdir "${ZETTAG}"
+                touch "${ZETTAG}/README.md"
+                {
+                    echo "---"
+                    echo "zetteltag: ${ZETTAG}"
+                    echo "keywords: []"
+                    echo "mainfont: Hack"
+                    echo "mainfontoptions:"
+                    echo "- Extension=.ttf"
+                    echo "- UprightFont=* Regular Nerd Font Complete Windows Compatible"
+                    echo "- BoldFont=* Bold Nerd Font Complete Windows Compatible"
+                    echo "- ItalicFont=* Italic Nerd Font Complete Windows Compatible"
+                    echo "- BoldItalicFont=* Bold Italic Nerd Font Complete Windows Compatible"
+                    echo "geometry:"
+                    echo "- margin=1in"
+                    echo "---\n"
+                    echo "# ${ZETTELTITLE}" 
+                } >> "${ZETTAG}/README.md"
+                ${EDITOR} "${ZETTAG}/README.md" && git add "${ZETTAG}/" && git commit -m "${ZETTELTITLE}"
+                ;;
+        esac
+    fi
 }
 
 main $@
