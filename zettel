@@ -23,7 +23,7 @@ main() {
     else
         ZETTELTITLE=$@
         case $ZETTELTITLE in
-            (*[!abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_:.[:blank:]-]*)
+            (*[!abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúÁÉÍÓÚ1234567890_:.[:blank:]-]*)
                 echo >&2 "Zettel Title includes NOT allowed characters" && exit 1;;
             (*)
                 cd "${ZETTELKASTENDIR}" || exit
