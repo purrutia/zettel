@@ -27,25 +27,11 @@ main() {
                 echo >&2 "Zettel Title includes NOT allowed characters" && exit 1;;
             (*)
                 cd "${ZETTELKASTENDIR}" || exit
-                mkdir "${ZETTAG}"
-                touch "${ZETTAG}/README.md"
+                touch "${ZETTAG}.md"
                 {
-                    echo "---"
-                    echo "zetteltag: ${ZETTAG}"
-                    echo "keywords: []"
-                    echo "mainfont: Hack"
-                    echo "mainfontoptions:"
-                    echo "- Extension=.ttf"
-                    echo "- UprightFont=* Regular Nerd Font Complete Windows Compatible"
-                    echo "- BoldFont=* Bold Nerd Font Complete Windows Compatible"
-                    echo "- ItalicFont=* Italic Nerd Font Complete Windows Compatible"
-                    echo "- BoldItalicFont=* Bold Italic Nerd Font Complete Windows Compatible"
-                    echo "geometry:"
-                    echo "- margin=1in"
-                    echo "---\n"
-                    echo "# ${ZETTELTITLE}" 
-                } >> "${ZETTAG}/README.md"
-                ${EDITOR} "${ZETTAG}/README.md" && git add "${ZETTAG}/" && git commit -m "${ZETTELTITLE}"
+                    echo "# ${ZETTELTITLE} -- ${ZETTAG}" 
+                } >> "${ZETTAG}.md"
+                ${EDITOR} "${ZETTAG}.md" && echo "- [${ZETTAG}](${ZETTAG}.md) -- ${ZETTELTITLE}" >> index.md && git add "${ZETTAG}.md" "index.md" && git commit -m "${ZETTAG} -- ${ZETTELTITLE}"
                 ;;
         esac
     fi
