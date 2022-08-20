@@ -31,7 +31,7 @@ main() {
                 {
                     echo "# ${ZETTELTITLE} -- ${ZETTAG}" 
                 } >> "${ZETTAG}.md"
-                ${EDITOR} "${ZETTAG}.md" && echo "- [${ZETTAG}](${ZETTAG}.md) -- ${ZETTELTITLE}" >> index.md && git add "${ZETTAG}.md" "index.md" && git commit -m "${ZETTAG} -- ${ZETTELTITLE}"
+                nvim "${ZETTAG}.md" && echo "- [${ZETTAG}](${ZETTAG}.md) -- ${ZETTELTITLE}" >> README.md && git add "${ZETTAG}.md" "README.md" && git commit -m "${ZETTAG} -- ${ZETTELTITLE}"
                 ;;
         esac
     fi
