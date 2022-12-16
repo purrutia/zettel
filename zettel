@@ -3,7 +3,7 @@
 # zettel: creates a new zettel on Zettelkasten repository
 
 ZETTAG=$(utctag)
-REPOSDIR="${HOME}/repos/github.com/${USER}"
+REPOSDIR="${HOME}/repos"
 ZETTELKASTENDIR="${REPOSDIR}/zettelkasten/"
 
 usage() {
